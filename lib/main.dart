@@ -1,4 +1,4 @@
-import 'package:evencir_task/provider/product_page_provider.dart';
+import 'package:evencir_task/provider/favorites_provider.dart';
 import 'package:evencir_task/view/home_page/home_page_screen.dart';
 import 'package:evencir_task/view/splash/splash_screen.dart';
 import 'package:evencir_task/widgets/loader/easy_loading.dart';
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ProductPageProvider()),
+        ChangeNotifierProvider(create: (_) => FavoritesProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

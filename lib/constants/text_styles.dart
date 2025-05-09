@@ -39,11 +39,12 @@ class AppTextStyles {
   static const TextStyle bodyPoppins = TextStyle(
     fontFamily: 'Poppins',
     fontSize: 16,
+    color: Colors.black,
   );
 
-  static const TextStyle buttonPoppins = TextStyle(
+  static const TextStyle littelBodyPoppins = TextStyle(
     fontFamily: 'Poppins',
     fontSize: 14,
-    fontWeight: FontWeight.w600,
+    color: Colors.black,
   );
 }

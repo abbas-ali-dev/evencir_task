@@ -6,7 +6,7 @@ import 'package:evencir_task/widgets/loader/easy_loading.dart';
 import 'package:evencir_task/widgets/toaster/toaster.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-class ProductPageProvider extends ChangeNotifier {
+class CategoryProductsProvider extends ChangeNotifier {
   ProductPageModel? _productPageModel;
   List<Product> _filteredProducts = [];
   bool _isLoading = false;
@@ -15,13 +15,13 @@ class ProductPageProvider extends ChangeNotifier {
 
   ProductPageModel? get productPageModel => _productPageModel;
   List<Product> get allProducts => _productPageModel?.products ?? [];
-  List<Product> get products =>
+  List<Product> get filteredProducts =>
       _searchQuery.isEmpty ? allProducts : _filteredProducts;
   bool get isLoading => _isLoading;
   String get errorMessage => _errorMessage;
   String get searchQuery => _searchQuery;
 
-  Future<void> fetchProducts() async {
+  Future<void> fetchCategoryProducts(String categorySlug) async {
     try {
       _isLoading = true;
       notifyListeners();
@@ -31,7 +31,7 @@ class ProductPageProvider extends ChangeNotifier {
 
       final response = await NetworkManager().callApi(
         method: HttpMethod.Get,
-        urlEndPoint: EndPoints.products,
+        urlEndPoint: '${EndPoints.categoryProducts}$categorySlug',
       );
 
       if (response != null && response.statusCode == 200) {
@@ -63,19 +63,15 @@ class ProductPageProvider extends ChangeNotifier {
             product.title?.toLowerCase().contains(query.toLowerCase()) ?? false;
         final brandMatch =
             product.brand?.toLowerCase().contains(query.toLowerCase()) ?? false;
-        final categoryMatch =
-            product.category?.toLowerCase().contains(query.toLowerCase()) ??
+        final descriptionMatch =
+            product.description?.toLowerCase().contains(query.toLowerCase()) ??
                 false;
 
-        return titleMatch || brandMatch || categoryMatch;
+        return titleMatch || brandMatch || descriptionMatch;
       }).toList();
     }
 
     notifyListeners();
-  }
-
-  void retryFetch() {
-    fetchProducts();
   }
 
   void clearSearch() {
