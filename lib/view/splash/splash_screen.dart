@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:evencir_task/constants/text_styles.dart';
 import 'package:evencir_task/core/routes/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3), () {
+
+    Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacementNamed(
         context,
         Routes.home,
@@ -23,12 +25,20 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
+      extendBodyBehindAppBar: true,
+      backgroundColor: Colors.transparent,
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
-            image: Image.asset('assets/images/splash_image.png').image,
+            image: AssetImage('assets/images/splash_image.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -40,33 +50,33 @@ class _SplashScreenState extends State<SplashScreen> {
                 padding: const EdgeInsets.only(top: 100.0),
                 child: Text(
                   'My Store',
-                  style: TextStyle(
-                    fontSize: 48.0,
-                    fontWeight: FontWeight.bold,
+                  style: AppTextStyles.headingPlayfair.copyWith(
+                    fontSize: 48,
                     color: Colors.black,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 50.0),
+                padding: const EdgeInsets.only(bottom: 120.0),
                 child: Column(
                   children: [
                     Text(
                       'Valkommen',
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.bold,
+                      style: AppTextStyles.bodyPoppins.copyWith(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
                         color: Colors.white,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Text(
-                        'Hos ass kan du baka tid has nastan alla Sveriges salonger och motagningar. Baka frisor, massage, skonhetsbehandingar, friskvard och mycket mer.',
+                        'Hos ass kan du baka tid has nastan alla\nSveriges salonger och motagningar.\nBaka frisor, massage, skonhetsbehandingar,\nfriskvard och mycket mer.',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 16.0,
+                        style: AppTextStyles.bodyPoppins.copyWith(
                           color: Colors.white,
+                          fontSize: 14,
                         ),
                       ),
                     ),

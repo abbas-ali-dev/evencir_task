@@ -1,10 +1,18 @@
-import 'package:evencir_task/core/routes/routes.dart';
 import 'package:evencir_task/view/home_page/home_page_screen.dart';
 import 'package:evencir_task/view/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+    ),
+  );
+
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -18,10 +26,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: Routes.splash,
+      home: const SplashScreen(),
       routes: {
-        Routes.splash: (context) => SplashScreen(),
-        Routes.home: (context) => HomePageScreen(),
+        '/home': (context) => const HomePageScreen(),
       },
     );
   }

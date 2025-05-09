@@ -1,4 +1,4 @@
 class Routes {
-  static const String splash = '/splash';
+  static const String splash = '/';
   static const String home = '/home';
 }
