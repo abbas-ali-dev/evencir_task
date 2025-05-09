@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:evencir_task/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +23,7 @@ class CustomProductCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 2,
       color: Colors.white,
       margin: const EdgeInsets.all(15.0),
       child: Padding(
@@ -30,11 +32,16 @@ class CustomProductCards extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Image.network(
-              imageUrl,
-              height: 150,
+            CachedNetworkImage(
+              imageUrl: imageUrl,
+              height: 200,
               width: double.infinity,
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
+              placeholder: (context, url) => const Center(
+                  child: CircularProgressIndicator(
+                color: Colors.black,
+              )),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
             const SizedBox(height: 10.0),
             Row(

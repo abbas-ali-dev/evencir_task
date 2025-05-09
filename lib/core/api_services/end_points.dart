@@ -1,6 +1,5 @@
 class EndPoints {
-  static const baseUrl = 'https://reqres.in/api/';
+  static const baseUrl = 'https://dummyjson.com/';
 
-  static const listUsers = 'users?page=';
-  static const profile = 'users/2';
+  static const products = 'products?limit=100';
 }

@@ -11,7 +11,7 @@ class Easyloding {
       ..indicatorSize = 45.0
       ..radius = 10.0
       ..progressColor = Colors.white
-      ..backgroundColor = Color(0XFFffd21f)
+      ..backgroundColor = Colors.black
       ..indicatorColor = Colors.white
       ..textColor = Colors.white
       ..maskColor = Colors.black.withOpacity(0.5)
