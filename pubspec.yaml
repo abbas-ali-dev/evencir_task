@@ -24,6 +24,15 @@ dependencies:
   # network image
   cached_network_image: ^3.4.1
 
+  # launcher icon
+  flutter_launcher_icons: ^0.14.3
+
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/app_icon.png"
+  min_sdk_android: 21
 
 
 dev_dependencies:
@@ -36,6 +45,8 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/fonts/
+    - assets/icons/
     
   fonts:
     - family: PlayfairDisplay
