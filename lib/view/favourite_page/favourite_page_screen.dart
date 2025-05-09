@@ -18,6 +18,7 @@ class FavouritePageScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(top: 40.0, left: 15.0, right: 15.0),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               const Text(
                 'Favourites',
@@ -107,7 +108,7 @@ class FavouritePageScreen extends StatelessWidget {
             children: [
               Padding(
                 padding:
-                    const EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
+                    const EdgeInsets.only(left: 30.0, top: 5.0, bottom: 5.0),
                 child: Text(
                   '${favoriteProducts.length} favorite products',
                   style: AppTextStyles.bodyPoppins.copyWith(

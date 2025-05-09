@@ -66,7 +66,7 @@ class _ProductPageScreenState extends State<ProductPageScreen> {
               children: [
                 Padding(
                   padding:
-                      const EdgeInsets.only(left: 30.0, top: 5.0, bottom: 10.0),
+                      const EdgeInsets.only(left: 30.0, top: 5.0, bottom: 5.0),
                   child: Text(
                     '${provider.products.length} results found',
                     style: AppTextStyles.bodyPoppins.copyWith(
