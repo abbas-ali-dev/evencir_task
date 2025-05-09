@@ -41,7 +41,10 @@ class CustomProductCards extends StatelessWidget {
                   child: CircularProgressIndicator(
                 color: Colors.black,
               )),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
+              errorWidget: (context, url, error) => const Icon(
+                Icons.error,
+                color: Colors.red,
+              ),
             ),
             const SizedBox(height: 10.0),
             Row(

@@ -8,21 +8,27 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class ProductPageProvider extends ChangeNotifier {
   ProductPageModel? _productPageModel;
+  List<Product> _filteredProducts = [];
   bool _isLoading = false;
   String _errorMessage = '';
+  String _searchQuery = '';
 
+  // Getters
   ProductPageModel? get productPageModel => _productPageModel;
-  List<Product> get products => _productPageModel?.products ?? [];
+  List<Product> get allProducts => _productPageModel?.products ?? [];
+  List<Product> get products =>
+      _searchQuery.isEmpty ? allProducts : _filteredProducts;
   bool get isLoading => _isLoading;
   String get errorMessage => _errorMessage;
+  String get searchQuery => _searchQuery;
 
-  ProductPageProvider();
-
+  // Method to fetch products from API
   Future<void> fetchProducts() async {
     try {
       _isLoading = true;
       notifyListeners();
 
+      // Show loading indicator
       await Easyloding.configLoading();
       EasyLoading.show(status: 'Loading products...');
 
@@ -49,38 +55,38 @@ class ProductPageProvider extends ChangeNotifier {
     }
   }
 
+  // Method to search/filter products
+  void searchProducts(String query) {
+    _searchQuery = query;
+
+    if (query.isEmpty) {
+      _filteredProducts = [];
+    } else {
+      _filteredProducts = allProducts.where((product) {
+        final titleMatch =
+            product.title?.toLowerCase().contains(query.toLowerCase()) ?? false;
+        final brandMatch =
+            product.brand?.toLowerCase().contains(query.toLowerCase()) ?? false;
+        final categoryMatch =
+            product.category?.toLowerCase().contains(query.toLowerCase()) ??
+                false;
+
+        return titleMatch || brandMatch || categoryMatch;
+      }).toList();
+    }
+
+    notifyListeners();
+  }
+
+  // Method to retry fetching products
   void retryFetch() {
     fetchProducts();
   }
 
-  List<Product> searchProducts(String query) {
-    if (query.isEmpty) return products;
-
-    return products
-        .where((product) =>
-            product.title?.toLowerCase().contains(query.toLowerCase()) ?? false)
-        .toList();
-  }
-
-  List<Product> filterByCategory(String category) {
-    if (category.isEmpty) return products;
-
-    return products
-        .where((product) =>
-            product.category?.toLowerCase() == category.toLowerCase())
-        .toList();
-  }
-
-  List<Product> sortByPrice(bool ascending) {
-    final sortedProducts = List<Product>.from(products);
-
-    sortedProducts.sort((a, b) {
-      if (a.price == null || b.price == null) return 0;
-      return ascending
-          ? a.price!.compareTo(b.price!)
-          : b.price!.compareTo(a.price!);
-    });
-
-    return sortedProducts;
+  // Method to clear search
+  void clearSearch() {
+    _searchQuery = '';
+    _filteredProducts = [];
+    notifyListeners();
   }
 }
