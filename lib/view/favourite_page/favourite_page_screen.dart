@@ -10,7 +10,7 @@ class FavouritePageScreen extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(120.0),
         child: Padding(
-          padding: const EdgeInsets.only(top: 40.0),
+          padding: const EdgeInsets.only(top: 40.0, left: 15.0, right: 15.0),
           child: Column(
             children: [
               const Text(

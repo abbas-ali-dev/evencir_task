@@ -1,11 +1,15 @@
+import 'package:evencir_task/provider/product_page_provider.dart';
 import 'package:evencir_task/view/home_page/home_page_screen.dart';
 import 'package:evencir_task/view/splash/splash_screen.dart';
+import 'package:evencir_task/widgets/loader/easy_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Easyloding.configLoading();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -20,16 +24,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'EvenCir Task',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ProductPageProvider()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'EvenCir Task',
+        builder: EasyLoading.init(),
+        theme: ThemeData(
+            primarySwatch: Colors.blue,
+            scaffoldBackgroundColor: Colors.white,
+            appBarTheme: const AppBarTheme(
+              color: Colors.white,
+              elevation: 0,
+            )),
+        home: const SplashScreen(),
+        routes: {
+          '/home': (context) => const HomePageScreen(),
+        },
       ),
-      home: const SplashScreen(),
-      routes: {
-        '/home': (context) => const HomePageScreen(),
-      },
     );
   }
 }
