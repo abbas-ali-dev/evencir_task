@@ -17,9 +17,7 @@ class _ProductPageScreenState extends State<ProductPageScreen> {
   @override
   void initState() {
     super.initState();
-    // Initialize the provider
     _provider = ProductPageProvider();
-    // Fetch products after the widget is built
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _provider.fetchProducts();
     });
@@ -27,7 +25,6 @@ class _ProductPageScreenState extends State<ProductPageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Provide the provider to the widget tree
     return ChangeNotifierProvider.value(
       value: _provider,
       child: Consumer<ProductPageProvider>(

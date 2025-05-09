@@ -47,11 +47,15 @@ class CustomProductCards extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(title,
-                    style: AppTextStyles.bodyPoppins.copyWith(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    )),
+                Expanded(
+                  child: Text(title,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTextStyles.bodyPoppins.copyWith(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      )),
+                ),
                 Text('\$$price   ',
                     style: AppTextStyles.bodyPoppins.copyWith(
                       fontSize: 18,
